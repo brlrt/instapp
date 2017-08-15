@@ -16,7 +16,7 @@ class FollowByLocationCommand extends InstagramCommand
         Data\WaitTime
     ;
 
-    protected function configure()
+    protected function config()
     {
         $this
             ->setName('follow:location')
@@ -28,7 +28,7 @@ class FollowByLocationCommand extends InstagramCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function init()
     {
         $locations = $this->getLocations();
 

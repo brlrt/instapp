@@ -16,7 +16,7 @@ class FollowByFollowerCommand extends InstagramCommand
         Data\WaitTime
     ;
 
-    protected function configure()
+    protected function config()
     {
         $this
             ->setName('follow:follower')
@@ -28,7 +28,7 @@ class FollowByFollowerCommand extends InstagramCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function init()
     {
         $persons = $this->getPersons();
 

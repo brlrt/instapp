@@ -15,7 +15,7 @@ class LikeTimelineCommand extends InstagramCommand
         Data\WaitTime
     ;
 
-    protected function configure()
+    protected function config()
     {
         $this
             ->setName('like:timeline')
@@ -26,7 +26,7 @@ class LikeTimelineCommand extends InstagramCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function init()
     {
         $this->instapp['like']->maxLikeCount = $this->getLikeCount();
         $this->instapp['like']->waitTime = $this->getWaitTime();
