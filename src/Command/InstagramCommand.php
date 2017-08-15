@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Instapp\Command\Traits\Data;
 
-class InstagramCommand extends Command
+abstract class InstagramCommand extends Command
 {
     use Data\Login;
 
@@ -40,20 +40,27 @@ class InstagramCommand extends Command
         parent::__construct($name);
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function configure()
     {
-        $this->input = $input;
-        $this->output = $output;
+        $this->config();
 
         $this
             ->addOption('username', 'u', InputArgument::OPTIONAL, 'Account username')
             ->addOption('password', 'p', InputArgument::OPTIONAL, 'Account password')
             ->addOption('wait', null, InputArgument::OPTIONAL, 'Wait time')
         ;
+    }
 
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->instapp['logger']->title("Instagram Api Bot: {$this->getDescription()}");
 
+        $this->input = $input;
+        $this->output = $output;
+
         $this->login();
+
+        $this->init();
     }
 
     protected function login($useOption = true)
@@ -67,4 +74,7 @@ class InstagramCommand extends Command
             return $this->login(false);
         }
     }
+
+    abstract protected function config();
+    abstract protected function init();
 }
