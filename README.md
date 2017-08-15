@@ -6,6 +6,7 @@
 ## cli usage
 
     $ cd instapp
+    $instapp composer install
     
 Necessary data will be taken when commands are run
 
