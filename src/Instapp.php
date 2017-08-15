@@ -15,9 +15,8 @@ use Instapp\Service\Follow;
 use Instapp\Service\Like;
 use Instapp\Service\Logger;
 use Instapp\Service\User;
-use Pimple\Container;
 
-class Instapp extends Container
+class Instapp extends \Pimple\Container
 {
     public function __construct($config = [])
     {
@@ -67,6 +66,7 @@ class Instapp extends Container
     }
 
     /**
+     * IDE Helper
      * @return User|Follow|Logger|Instagram|Like
      */
     public function offsetGet($id)
