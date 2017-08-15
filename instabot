@@ -1,0 +1,16 @@
+#!/usr/bin/php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Symfony\Component\Console\Application as ConsoleApp;
+use Instapp\Command;
+use Instapp\Instapp;
+
+$app = new Instapp();
+
+$console = new ConsoleApp();
+$console->add(new Command\FollowByLocationCommand($app));
+$console->add(new Command\FollowByFollowerCommand($app));
+$console->add(new Command\LikeTimelineCommand($app));
+$console->run();
