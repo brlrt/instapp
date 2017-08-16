@@ -9,6 +9,7 @@ use InstagramAPI\Response\Model\Item;
 use Instapp\Macro\FollowContentsOfPost;
 use Instapp\Macro\FollowUserFollowers;
 use Instapp\Traits\Wait;
+use Instapp\Macro\FollowUsersInHashtag;
 
 class Follow
 {
@@ -167,6 +168,18 @@ class Follow
     {
         return (new FollowUsersInLocation($this->app))
             ->setLocation($locationId)
+            ->run()
+        ;
+    }
+
+    /**
+     * @param integer $hashtag
+     * @return bool
+     */
+    public function followUsersInHashtag($hashtag)
+    {
+        return (new FollowUsersInHashtag($this->app))
+            ->setHashtag($hashtag)
             ->run()
         ;
     }
