@@ -1,5 +1,6 @@
 {
     "name": "funcphp/instapp",
+    "keywords": ["instagram bot"],
     "description": "Instagram macro apps and command line client with PHP",
     "require": {
         "pimple/pimple": "^3.2",
