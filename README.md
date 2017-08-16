@@ -1,14 +1,12 @@
 # instapp
 
 ## installation
-`git clone https://github.com/funcphp/instapp.git`
 
-## cli usage
-
+    $ git clone https://github.com/funcphp/instapp.git
     $ cd instapp
     instapp$ composer install
-    
-Necessary data will be taken when commands are run
+
+## cli usage
 
 **Follow all users in a location**
 
@@ -21,8 +19,11 @@ Necessary data will be taken when commands are run
 **Like timeline feeds**
 
     instapp$ ./instapp-cli like:timeline
+    
+Necessary data will be taken when commands are run
 
 Or you can type data in command
+
 Ex:
 
     instapp$ ./instapp-cli like:timeline --username=my_account_username --password=my_password --max=200 --wait=10
