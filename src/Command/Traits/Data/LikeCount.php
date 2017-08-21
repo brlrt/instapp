@@ -16,7 +16,7 @@ trait LikeCount
         if ($this->input->getOption('max'))
             return $this->input->getOption('max');
 
-        $default = $default ?: 500;
+        $default = $default ?: 1000;
 
         $helper = $this->getHelper('question');
 

@@ -20,7 +20,7 @@ class Like
     /**
      * @var int
      */
-    public $maxLikeCount = 100;
+    public $maxLikeCount = 1000;
 
     /**
      * @var \DateTime
