@@ -7,7 +7,7 @@ trait Wait
     /**
      * @var int
      */
-    public $waitTime = 5;
+    public $waitTime = 20;
 
     protected function wait()
     {

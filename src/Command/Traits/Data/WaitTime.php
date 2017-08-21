@@ -9,7 +9,7 @@ trait WaitTime
     /**
      * @var int
      */
-    protected $waitTime = 5;
+    protected $waitTime = 20;
 
     /**
      * Set wait time after process
