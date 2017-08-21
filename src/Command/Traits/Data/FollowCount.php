@@ -16,7 +16,7 @@ trait FollowCount
         if ($this->input->getOption('max'))
             return $this->input->getOption('max');
 
-        $default = $default ?: 100;
+        $default = $default ?: 500;
 
         $helper = $this->getHelper('question');
 

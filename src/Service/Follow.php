@@ -29,7 +29,7 @@ class Follow
     /**
      * @var int
      */
-    public $maxFollowCount = 100;
+    public $maxFollowCount = 500;
 
     /**
      * @var \DateTime
