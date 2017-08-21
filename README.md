@@ -39,3 +39,15 @@ ex:
 ex:
 
     ./instapp-cli list follow
+
+### cli arguments
+
+|argument|description|type|default|command|
+|-|-|-|-|-|
+|username|account username|string|*required*|*all commands*|
+|password|account password|string|*required*|*all commands*|
+|wait|duration between events (s)|integer|**20**|*all commands*|
+|max|max number of follow / like|integer|**500**|**follow:\*** , **like:\***|
+|locations|location ids|integer[] (commas)|*required for*|**follow:location**|
+|persons|person usernames|string[] (commas)|*required for*|**follow:follower**|
+|hashtags|hashtags|string[] (commas)|*required for*|**follow:hashtag**|
