@@ -19,10 +19,11 @@ class User
 
     /**<
      * @param UserModel|string|integer|array $userdata
+     * @param bool $validate
      * @return integer|false user id
      * @throws \InvalidArgumentException
      */
-    public function getIdFromUserdata($userdata)
+    public function getIdFromUserdata($userdata, $validate = true)
     {
         if ($userdata instanceof User && $userdata = $userdata->user_id ?: $userdata->username)
         {
@@ -38,8 +39,9 @@ class User
         }
         elseif (is_numeric($userdata)) // maybe id
         {
-            if (!$this->app['api']->people->getInfoById($userdata)->isUser())
-                return false;
+            if ($validate)
+                if (!$this->app['api']->people->getInfoById($userdata)->isUser())
+                   return false;
 
             return $userdata;
         }
@@ -50,6 +52,40 @@ class User
             } catch (\Exception $e) {
                 return;
             }
+        }
+
+        throw new \InvalidArgumentException("Invalid argument for getting user id");
+    }
+
+    /**
+     * @param UserModel|string|integer|array $userdata
+     * @return integer|false user id
+     * @throws \InvalidArgumentException
+     */
+    public function getUsernameFromUserdata($userdata)
+    {
+        if ($userdata instanceof User && $userdata = $userdata->user_id ?: $userdata->username)
+        {
+            return $this->getUsernameFromUserdata($userdata);
+        }
+        elseif (is_object($userdata) && $userdata = @$userdata->user_id ?: @($userdata->id ?: $userdata->username) )
+        {
+            return $this->getUsernameFromUserdata($userdata);
+        }
+        elseif (is_array($userdata) && $userdata = $userdata['username'] ?: ($userdata['id'] ?: $userdata['user_id']))
+        {
+            return $this->getUsernameFromUserdata($userdata);
+        }
+        elseif (is_numeric($userdata))
+        {
+            if ($id = $this->getIdFromUserdata($userdata))
+            {
+                return $this->app['api']->people->getInfoById($id)->user->username;
+            }
+        }
+        elseif (is_string($userdata))
+        {
+            return $userdata;
         }
 
         throw new \InvalidArgumentException("Invalid argument for getting user id");
