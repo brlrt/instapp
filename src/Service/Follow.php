@@ -51,12 +51,7 @@ class Follow
 
         $this->startedAt = new \DateTime();
 
-        $this->requestedUsers = array_map(function($user) {
-            return $user->user_id;
-        }, array_merge(
-            $this->app['api']->people->getSelfFollowers()->users,
-            $this->app['api']->people->getSelfFollowing()->users
-        ));
+        $this->takeRequested();
     }
 
     /**
@@ -123,7 +118,7 @@ class Follow
      */
     public function isRequested($user)
     {
-        return isset($this->requestedUsers[$this->app['user']->getIdFromUserdata($user)]);
+        return isset($this->requestedUsers[$this->app['user']->getUsernameFromUserdata($user)]);
     }
 
     /**
@@ -132,7 +127,7 @@ class Follow
      */
     public function addRequested($user)
     {
-        $this->requestedUsers[$this->app['user']->getIdFromUserdata($user)] = true;
+        $this->requestedUsers[$this->app['user']->getUsernameFromUserdata($user)] = true;
     }
 
     /**
@@ -142,6 +137,21 @@ class Follow
     public function getRequested()
     {
         return array_keys($this->requestedUsers);
+    }
+
+    /**
+     * Take following users and followers
+     */
+    private function takeRequested()
+    {
+        foreach (
+            array_merge(
+                $this->app['api']->people->getSelfFollowers()->users,
+                $this->app['api']->people->getSelfFollowing()->users
+            ) as $user
+        ) {
+            $this->addRequested($user);
+        }
     }
 
     # MACROS
