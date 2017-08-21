@@ -8,13 +8,17 @@
 
 ## cli usage
 
-**Follow all users in a location**
+**Follow all users in locations**
 
     instapp$ ./instapp-cli follow:location
     
-**Follow all users in a user's follower list**
+**Follow all users in user's followers**
 
     instapp$ ./instapp-cli follow:follower
+    
+**Follow all users in hashtags feeds**
+
+    instapp$ ./instapp-cli follow:hashtag
     
 **Like timeline feeds**
 
@@ -26,4 +30,4 @@ Or you can type data in command
 
 Ex:
 
-    instapp$ ./instapp-cli like:timeline --username=my_account_username --password=my_password --max=200 --wait=10
+    instapp$ ./instapp-cli <your_command> --username=my_account_username --password=my_password --max=200 --wait=10
