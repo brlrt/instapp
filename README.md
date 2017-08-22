@@ -8,26 +8,46 @@
 
 ## cli usage
 
-**Follow all users in locations**
+**follow all users in locations**
 
     instapp$ ./instapp-cli follow:location
     
-**Follow all users in user's followers**
+**follow all users in user's followers**
 
     instapp$ ./instapp-cli follow:follower
     
-**Follow all users in hashtags feeds**
+**follow all users in hashtags feeds**
 
     instapp$ ./instapp-cli follow:hashtag
     
-**Like timeline feeds**
+**like timeline feeds**
 
     instapp$ ./instapp-cli like:timeline
     
-Necessary data will be taken when commands are run
+necessary data will be taken when commands are run
 
-Or you can type data in command
+or you can type data in command
 
-Ex:
+ex:
 
     instapp$ ./instapp-cli <your_command> --username=my_account_username --password=my_password --max=200 --wait=10
+    
+### list commands
+
+    instapp$ ./instapp-cli list <command_root>
+    
+ex:
+
+    ./instapp-cli list follow
+
+### cli arguments
+
+|argument|description|type|default|command|
+|-|-|-|-|-|
+|username|account username|string|*required*|*all commands*|
+|password|account password|string|*required*|*all commands*|
+|wait|duration between events (s)|integer|**20**|*all commands*|
+|max|max number of follow / like|integer|**500**|**follow:\*** , **like:\***|
+|locations|location ids|integer[] (commas)|*required for*|**follow:location**|
+|persons|person usernames|string[] (commas)|*required for*|**follow:follower**|
+|hashtags|hashtags|string[] (commas)|*required for*|**follow:hashtag**|
