@@ -27,7 +27,7 @@ basic instagram macros and cli tool
     
 **follow all users in user's followers**
 
-    instapp$ php instapp-cli follow:follower
+    instapp$ php instapp-cli follow:user:follower
     
 **follow all users in hashtags feeds**
 
