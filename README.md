@@ -1,3 +1,4 @@
+
 # instapp
 
 ## installation
@@ -10,21 +11,21 @@
 
 **follow all users in locations**
 
-    instapp$ ./instapp-cli follow:location
+    instapp$ php instapp-cli follow:location
     
 **follow all users in user's followers**
 
-    instapp$ ./instapp-cli follow:follower
+    instapp$ php instapp-cli follow:follower
     
 **follow all users in hashtags feeds**
 
-    instapp$ ./instapp-cli follow:hashtag
+    instapp$ php instapp-cli follow:hashtag
     
 **like timeline feeds**
 
-    instapp$ ./instapp-cli like:timeline
+    instapp$ php instapp-cli like:timeline
     
-necessary data will be taken when commands are run
+required data will be asked when commands are run
 
 or you can type data in command
 
