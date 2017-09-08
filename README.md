@@ -64,3 +64,22 @@ ex:
 |locations|location ids|integer[] (commas)|*required for*|**follow:location**|
 |persons|person usernames|string[] (commas)|*required for*|**follow:follower**|
 |hashtags|hashtags|string[] (commas)|*required for*|**follow:hashtag**|
+
+## todo list
+
+|macro|description|status|
+|-|-|:-:|
+|`follow:user:followers`|Follow all users in a user's follower list|:heavy_check_mark:|
+|`follow:user:following`|Follow all users in a user's following list|waiting|
+|`follow:location`|Follow all users in location feed|:heavy_check_mark:|
+|`follow:hashtag`|Follow all users in hashtag feed|:heavy_check_mark:|
+|`follow:discover:all`|Follow all users in discover feed|waiting|
+|`follow:discover:popular`|Follow all users in popular feed|waiting|
+|`unfollow:following`|Unfollow all users who you following|waiting|
+|`unfollow:followers`|Unfollow all users who you following in your follower list|waiting|
+|`like:timeline`|Like all posts in timeline feed|:heavy_check_mark:|
+|`like:location`|Like all posts in location feed|waiting|
+|`like:hashtag`|Like all posts in hashtag feed|waiting|
+|`like:user`|Like all posts in user feed|waiting|
+|`like:discover:all`|Like all posts in discover feed|waiting|
+|`like:discover:popular`|Like all posts in popular feed|waiting|
