@@ -1,6 +1,18 @@
 
 # instapp
 
+basic instagram macros and cli tool
+
+## requirements
+
+    * php >= 5.6
+    * php-curl
+    * php-mbstring
+    * php-gd
+    * php-exif
+    * php-zlib
+    * php-gmp
+
 ## installation
 
     $ git clone https://github.com/funcphp/instapp.git
