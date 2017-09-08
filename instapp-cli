@@ -10,8 +10,8 @@ use Instapp\Instapp;
 $app = new Instapp();
 
 $console = new ConsoleApp();
-$console->add(new Command\FollowByLocationCommand($app));
-$console->add(new Command\FollowByHashtagCommand($app));
-$console->add(new Command\FollowByFollowerCommand($app));
+$console->add(new Command\FollowInLocationCommand($app));
+$console->add(new Command\FollowInHashtagCommand($app));
+$console->add(new Command\FollowUserFollowersCommand($app));
 $console->add(new Command\LikeTimelineCommand($app));
 $console->run();

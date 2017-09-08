@@ -8,10 +8,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Instapp\Command\Traits\Data;
 
-class FollowByHashtagCommand extends InstagramCommand
+class FollowInLocationCommand extends InstagramCommand
 {
     use
-        Data\Hashtag,
+        Data\Location,
         Data\FollowCount,
         Data\WaitTime
     ;
@@ -19,25 +19,25 @@ class FollowByHashtagCommand extends InstagramCommand
     protected function config()
     {
         $this
-            ->setName('follow:hashtag')
-            ->setDescription('Follow users by hashtag')
-            ->setHelp('Follow all users in hashtag')
+            ->setName('follow:location')
+            ->setDescription('Follow users by location')
+            ->setHelp('Follow all users in a location')
 
             ->addOption('max', null, InputArgument::OPTIONAL, 'Max follow count')
-            ->addOption('hashtags', null, InputArgument::OPTIONAL, 'Hashtags (commas)')
+            ->addOption('locations', null, InputArgument::OPTIONAL, 'Location ids (commas)')
         ;
     }
 
     protected function init()
     {
-        $hashtags = $this->getHashtags();
+        $locations = $this->getLocations();
 
         $this->instapp['follow']->waitTime = $this->getWaitTime();
         $this->instapp['follow']->maxFollowCount = $this->getFollowCount();
 
-        foreach ($hashtags as $hashtag)
+        foreach ($locations as $locationId)
         {
-            $this->instapp['follow']->followUsersInHashtag($hashtag);
+            $this->instapp['follow']->followUsersInLocation($locationId);
         }
     }
 }

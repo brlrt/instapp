@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Instapp\Command\Traits\Data;
 
-class FollowByFollowerCommand extends InstagramCommand
+class FollowUserFollowersCommand extends InstagramCommand
 {
     use
         Data\Persons,
@@ -19,8 +19,8 @@ class FollowByFollowerCommand extends InstagramCommand
     protected function config()
     {
         $this
-            ->setName('follow:follower')
-            ->setDescription('Follow users by a user\'s followers')
+            ->setName('follow:user:follower')
+            ->setDescription('Follow a user\'s followers')
             ->setHelp('Follow all users in a user\'s follower list')
 
             ->addOption('max', null, InputArgument::OPTIONAL, 'Max follow count')
