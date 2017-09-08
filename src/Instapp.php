@@ -43,8 +43,7 @@ class Instapp extends \Pimple\Container
         }
 
         try {
-            $this['api']->setUser($this['instagram.username'], $this['instagram.password']);
-            $this['api']->login();
+            $this['api']->login($this['instagram.username'], $this['instagram.password']);
         } catch (InstagramException $e) {
             throw new InvalidLoginDataException("Username or password incorrect");
         }
