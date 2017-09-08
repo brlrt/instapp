@@ -31,15 +31,15 @@ or you can type data in command
 
 ex:
 
-    instapp$ ./instapp-cli <your_command> --username=my_account_username --password=my_password --max=200 --wait=10
+    instapp$ php instapp-cli <your_command> --username=my_account_username --password=my_password --max=200 --wait=10
     
 ### list commands
 
-    instapp$ ./instapp-cli list <command_root>
+    instapp$ php instapp-cli list <command_root>
     
 ex:
 
-    ./instapp-cli list follow
+    php instapp-cli list follow
 
 ### cli arguments
 
