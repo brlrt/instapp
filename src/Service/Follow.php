@@ -76,7 +76,11 @@ class Follow
             }
         }
 
-        $this->app['api']->people->follow($this->app['user']->getIdFromUserdata($user));
+        $userId = $this->app['user']->getIdFromUserdata($user);
+        $this->app['api']->people->follow($userId);
+
+        if ($callback = $this->app->getCallback('follow'))
+            call_user_func($callback, [$this->app['api']->people->getInfoById($userId), true]);
 
         $this->app['logger']
             ->add(
