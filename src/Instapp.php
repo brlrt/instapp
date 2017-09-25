@@ -2,10 +2,7 @@
 
 namespace Instapp;
 
-use InstagramAPI\Exception\InstagramException;
 use InstagramAPI\Instagram;
-use Instapp\Exception\InvalidLoginDataException;
-use Instapp\Exception\LoginDataRequiredException;
 use Instapp\Provider\FollowServiceProvider;
 use Instapp\Provider\LikeServiceProvider;
 use Instapp\Provider\InstagramAPIServiceProvider;
@@ -15,6 +12,10 @@ use Instapp\Service\Follow;
 use Instapp\Service\Like;
 use Instapp\Service\Logger;
 use Instapp\Service\User;
+use Instapp\Exception\InvalidLoginDataException;
+use Instapp\Exception\LoginDataRequiredException;
+use InstagramAPI\Exception\InstagramException;
+use Pimple\Exception\UnknownIdentifierException;
 
 class Instapp extends \Pimple\Container
 {
@@ -37,13 +38,10 @@ class Instapp extends \Pimple\Container
         if ($username) $this['instagram.username'] = $username;
         if ($password) $this['instagram.password'] = $password;
 
-        if (!$this['instagram.username'] || !$this['instagram.password'])
-        {
-            throw new LoginDataRequiredException("Type username and password");
-        }
-
         try {
             $this['api']->login($this['instagram.username'], $this['instagram.password']);
+        } catch (UnknownIdentifierException $e) {
+            throw new LoginDataRequiredException("Set username and password");
         } catch (InstagramException $e) {
             throw new InvalidLoginDataException("Username or password incorrect");
         }
