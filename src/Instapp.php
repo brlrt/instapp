@@ -63,6 +63,48 @@ class Instapp extends \Pimple\Container
     }
 
     /**
+     * Set callback
+     *
+     * @param string $name
+     * @param callable $callback
+     * @return Instapp
+     */
+    public function on($name, $callback)
+    {
+        $this->offsetSet("callback:{$name}", $callback);
+
+        return $this;
+    }
+
+    /**
+     * Get callback
+     *
+     * @param $name
+     * @return callable
+     */
+    public function getCallback($name)
+    {
+        try {
+            return $this->offsetGet("callback:$name}");
+        } catch (UnknownIdentifierException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Clear callback
+     *
+     * @param string $name
+     * @return Instapp
+     */
+    public function clearCallback($name)
+    {
+        $this->offsetUnset("callback:{$name}");
+
+        return $this;
+    }
+
+    /**
      * IDE Helper
      * @return User|Follow|Logger|Instagram|Like
      */
@@ -71,3 +113,4 @@ class Instapp extends \Pimple\Container
         return parent::offsetGet($id);
     }
 }
+
