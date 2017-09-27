@@ -2,8 +2,8 @@
 
 namespace Instapp\Service;
 
-use Instapp\Instapp;
 use InstagramAPI\Response\Model\User as UserModel;
+use Instapp\Instapp;
 
 class User
 {

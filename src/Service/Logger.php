@@ -4,6 +4,8 @@ namespace Instapp\Service;
 
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Instapp\Instapp;
+use Instapp\Event\LogEvent;
 
 /**
  * Class Logger
@@ -11,11 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Logger
 {
-    const STANDARD = null;
-    const INFO = 1;
-    const ERROR = 2;
-    const TITLE = 3;
-    const FOOTER = 4;
+    const NORMAL = 'normal';
+    const INFO = 'info';
+    const ERROR = 'error';
+    const TITLE = 'title';
+    const FOOTER = 'footer';
 
     /** @var bool */
     protected $enabled = true;
@@ -23,14 +25,18 @@ class Logger
     /** @var OutputInterface */
     protected $output;
 
+    /** @var Instapp */
+    protected $app;
+
     /** @var string[] */
     protected $type = [null];
 
     /**
      * Logger constructor.
      */
-    public function __construct()
+    public function __construct(Instapp $app)
     {
+        $this->app = $app;
         $this->output = new ConsoleOutput();
     }
 
@@ -48,14 +54,17 @@ class Logger
 
     /**
      * @param string|array $message
-     * @param integer $type
+     * @param string $type
      * @return Logger
      */
-    public function add($message = '', $type = self::STANDARD)
+    public function add($message = '', $type = self::NORMAL)
     {
         if (is_array($message))
             foreach ($message as $item)
                 return $this->add($item, $type);
+
+        if (!empty($message))
+            $this->app->dispatcher->dispatch(LogEvent::NAME, new LogEvent($message, $type));
 
         switch ($type)
         {
@@ -63,7 +72,7 @@ class Logger
             case self::INFO  : $message = "<info>{$message}</info>"; break;
             case self::TITLE : $message = ["<question>{$message}</question>", str_repeat('=', max(array_map('strlen', (array)$message)))]; break;
             case self::FOOTER: $message = [str_repeat('=', max(array_map('strlen', (array)$message))), "<question>{$message}</question>"]; break;
-            case self::STANDARD : break;
+            case self::NORMAL : break;
             default          : break;
         }
 
@@ -110,10 +119,10 @@ class Logger
 
     /**
      * @param string|array $message
-     * @param integer $type
+     * @param string $type
      * @return Logger
      */
-    public function log($message, $type = null)
+    public function log($message, $type = self::NORMAL)
     {
         return $this
             ->add()
@@ -124,7 +133,7 @@ class Logger
 
     /**
      * @param string|array $message
-     * @param integer $type
+     * @param string $type
      * @return Logger
      */
     public function start($message, $type = self::TITLE)

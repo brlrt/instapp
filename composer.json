@@ -5,7 +5,8 @@
     "require": {
         "pimple/pimple": "^3.2",
         "mgp25/instagram-php": "dev-master",
-        "symfony/console": "^3.3"
+        "symfony/console": "^3.3",
+        "symfony/event-dispatcher": "^3.3"
     },
     "autoload": {
         "psr-4": {"Instapp\\": "src"}

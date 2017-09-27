@@ -2,6 +2,7 @@
 
 namespace Instapp\Service;
 
+use Instapp\Event\FollowEvent;
 use Instapp\Macro\FollowUsersInLocation;
 use Instapp\Exception\MaxFollowCountException;
 use Instapp\Instapp;
@@ -77,10 +78,10 @@ class Follow
         }
 
         $userId = $this->app['user']->getIdFromUserdata($user);
+
         $this->app['api']->people->follow($userId);
 
-        if ($callback = $this->app->getCallback('follow'))
-            call_user_func($callback, [$this->app['api']->people->getInfoById($userId), true]);
+        $this->app->dispatcher->dispatch(FollowEvent::NAME, new FollowEvent($this->app['api']->people->getInfoById($userId)->user, true));
 
         $this->app['logger']
             ->add(

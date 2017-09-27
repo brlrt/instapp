@@ -2,9 +2,9 @@
 
 namespace Instapp\Provider;
 
-use Instapp\Service\User;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Instapp\Service\User;
 
 class UserServiceProvider implements ServiceProviderInterface
 {

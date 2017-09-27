@@ -2,9 +2,9 @@
 
 namespace Instapp\Provider;
 
-use Instapp\Service\Follow;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Instapp\Service\Follow;
 
 class FollowServiceProvider implements ServiceProviderInterface
 {

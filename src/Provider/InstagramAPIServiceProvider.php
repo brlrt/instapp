@@ -2,9 +2,9 @@
 
 namespace Instapp\Provider;
 
-use InstagramAPI\Instagram;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use InstagramAPI\Instagram;
 
 class InstagramAPIServiceProvider implements ServiceProviderInterface
 {

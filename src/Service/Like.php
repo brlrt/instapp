@@ -3,10 +3,10 @@
 namespace Instapp\Service;
 
 use InstagramAPI\Response\Model\Item;
-use Instapp\Exception\MaxLikeCountException;
 use Instapp\Instapp;
-use Instapp\Macro\LikeAllPostsInTimeline;
 use Instapp\Traits\Wait;
+use Instapp\Macro\LikeAllPostsInTimeline;
+use Instapp\Exception\MaxLikeCountException;
 
 class Like
 {

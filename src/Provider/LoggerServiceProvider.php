@@ -2,16 +2,16 @@
 
 namespace Instapp\Provider;
 
-use Instapp\Service\Logger;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Instapp\Service\Logger;
 
 class LoggerServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $container['logger'] = function() {
-            return new Logger();
+        $container['logger'] = function($app) {
+            return new Logger($app);
         };
     }
 }

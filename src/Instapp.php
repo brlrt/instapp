@@ -2,7 +2,10 @@
 
 namespace Instapp;
 
+use Pimple\Exception\UnknownIdentifierException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use InstagramAPI\Instagram;
+use InstagramAPI\Exception\InstagramException;
 use Instapp\Provider\FollowServiceProvider;
 use Instapp\Provider\LikeServiceProvider;
 use Instapp\Provider\InstagramAPIServiceProvider;
@@ -12,13 +15,17 @@ use Instapp\Service\Follow;
 use Instapp\Service\Like;
 use Instapp\Service\Logger;
 use Instapp\Service\User;
+use Instapp\Event\LoggedEvent;
 use Instapp\Exception\InvalidLoginDataException;
 use Instapp\Exception\LoginDataRequiredException;
-use InstagramAPI\Exception\InstagramException;
-use Pimple\Exception\UnknownIdentifierException;
 
 class Instapp extends \Pimple\Container
 {
+    /**
+     * @var EventDispatcher
+     */
+    public $dispatcher;
+
     public function __construct($config = [])
     {
         parent::__construct($config);
@@ -27,6 +34,8 @@ class Instapp extends \Pimple\Container
         parent::register(new UserServiceProvider());
         parent::register(new FollowServiceProvider());
         parent::register(new LikeServiceProvider());
+
+        $this->dispatcher = new EventDispatcher();
     }
 
     /**
@@ -45,6 +54,23 @@ class Instapp extends \Pimple\Container
         } catch (InstagramException $e) {
             throw new InvalidLoginDataException("Username or password incorrect");
         }
+
+        $this->dispatcher->dispatch(LoggedEvent::NAME, new LoggedEvent());
+    }
+
+    /**
+     * Add listener
+     *
+     * @param string $name
+     * @param callable $listener
+     * @param integer $priority
+     * @return Instapp
+     */
+    public function on($name, $listener, $priority = 0)
+    {
+        $this->dispatcher->addListener($name, $listener, $priority);
+
+        return $this;
     }
 
     /**
@@ -63,48 +89,6 @@ class Instapp extends \Pimple\Container
     }
 
     /**
-     * Set callback
-     *
-     * @param string $name
-     * @param callable $callback
-     * @return Instapp
-     */
-    public function on($name, $callback)
-    {
-        $this->offsetSet("callback:{$name}", $callback);
-
-        return $this;
-    }
-
-    /**
-     * Get callback
-     *
-     * @param $name
-     * @return callable
-     */
-    public function getCallback($name)
-    {
-        try {
-            return $this->offsetGet("callback:$name}");
-        } catch (UnknownIdentifierException $e) {
-            return null;
-        }
-    }
-
-    /**
-     * Clear callback
-     *
-     * @param string $name
-     * @return Instapp
-     */
-    public function clearCallback($name)
-    {
-        $this->offsetUnset("callback:{$name}");
-
-        return $this;
-    }
-
-    /**
      * IDE Helper
      * @return User|Follow|Logger|Instagram|Like
      */
@@ -113,4 +97,3 @@ class Instapp extends \Pimple\Container
         return parent::offsetGet($id);
     }
 }
-

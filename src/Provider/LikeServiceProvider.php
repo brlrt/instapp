@@ -2,9 +2,9 @@
 
 namespace Instapp\Provider;
 
-use Instapp\Service\Like;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Instapp\Service\Like;
 
 class LikeServiceProvider implements ServiceProviderInterface
 {
