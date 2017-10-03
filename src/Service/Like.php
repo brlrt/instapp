@@ -3,6 +3,7 @@
 namespace Instapp\Service;
 
 use InstagramAPI\Response\Model\Item;
+use Instapp\Event\LikeEvent;
 use Instapp\Instapp;
 use Instapp\Traits\Wait;
 use Instapp\Macro\LikeAllPostsInTimeline;
@@ -61,6 +62,8 @@ class Like
         }
 
         $this->app['api']->media->like($item->id);
+
+        $this->app->dispatcher->dispatch(LikeEvent::NAME, new LikeEvent($item, true));
 
         $this->app['logger']->add(sprintf(
             '(%s) - `%s - instagram.com/p/%s` - liked!',
