@@ -37,22 +37,22 @@ class FollowContentsOfPost extends Macro
     {
         if (self::OWNER & $followField)
         {
-            $this->app['follow']->followUser($this->post->user);
+            $this->app['follow']->followUser($this->post->getUser());
         }
 
-        if ((self::USERTAG & $followField) && $this->post->usertags)
+        if ((self::USERTAG & $followField) && $this->post->getUsertags())
         {
-            foreach ($this->post->usertags->getIn() as $tag)
+            foreach ($this->post->getUsertags()->getIn() as $tag)
             {
-                $this->app['follow']->followUser($tag->user);
+                $this->app['follow']->followUser($tag->getUser());
             }
         }
 
-        if ((self::COMMENT & $followField) && $this->post->has_more_comments)
+        if ((self::COMMENT & $followField) && $this->post->getHasMoreComments())
         {
-            foreach ($this->post->preview_comments as $comment)
+            foreach ($this->post->getPreviewComments() as $comment)
             {
-                $this->app['follow']->followUser($comment->user);
+                $this->app['follow']->followUser($comment->getUser());
             }
         }
 

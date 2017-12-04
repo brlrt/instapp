@@ -81,7 +81,7 @@ class Follow
 
         $this->app['api']->people->follow($userId);
 
-        $this->app->dispatcher->dispatch(FollowEvent::NAME, new FollowEvent($this->app['api']->people->getInfoById($userId)->user, true));
+        $this->app->dispatcher->dispatch(FollowEvent::NAME, new FollowEvent($this->app['api']->people->getInfoById($userId)->getUser(), true));
 
         $this->app['logger']
             ->add(
@@ -151,8 +151,8 @@ class Follow
     {
         foreach (
             array_merge(
-                $this->app['api']->people->getSelfFollowers()->users,
-                $this->app['api']->people->getSelfFollowing()->users
+                $this->app['api']->people->getSelfFollowers()->getUsers(),
+                $this->app['api']->people->getSelfFollowing()->getUsers()
             ) as $user
         ) {
             $this->addRequested($user);

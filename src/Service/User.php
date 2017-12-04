@@ -25,11 +25,11 @@ class User
      */
     public function getIdFromUserdata($userdata, $validate = true)
     {
-        if ($userdata instanceof User && $userdata = $userdata->user_id ?: $userdata->username)
+        if ($userdata instanceof User && $userdata = $userdata->getUserId() ?: $userdata->getUsername())
         {
             return $this->getIdFromUserdata($userdata);
         }
-        elseif (is_object($userdata) && $userdata = @$userdata->user_id ?: @($userdata->id ?: $userdata->username) )
+        elseif (is_object($userdata) && $userdata = @$userdata->getUserId() ?: @($userdata->getId() ?: $userdata->getUsername()) )
         {
             return $this->getIdFromUserdata($userdata);
         }
@@ -64,11 +64,11 @@ class User
      */
     public function getUsernameFromUserdata($userdata)
     {
-        if ($userdata instanceof User && $userdata = $userdata->user_id ?: $userdata->username)
+        if ($userdata instanceof User && $userdata = $userdata->getUserId() ?: $userdata->getUsername())
         {
             return $this->getUsernameFromUserdata($userdata);
         }
-        elseif (is_object($userdata) && $userdata = @$userdata->user_id ?: @($userdata->id ?: $userdata->username) )
+        elseif (is_object($userdata) && $userdata = @$userdata->getUserId() ?: @($userdata->getId() ?: $userdata->getUsername()) )
         {
             return $this->getUsernameFromUserdata($userdata);
         }
@@ -80,7 +80,7 @@ class User
         {
             if ($id = $this->getIdFromUserdata($userdata))
             {
-                return $this->app['api']->people->getInfoById($id)->user->username;
+                return $this->app['api']->people->getInfoById($id)->getUser()->getUsername();
             }
         }
         elseif (is_string($userdata))
@@ -97,6 +97,6 @@ class User
      */
     public function getUsername($user)
     {
-        return $this->app['api']->people->getInfoById($this->getIdFromUserdata($user))->user->username;
+        return $this->app['api']->people->getInfoById($this->getIdFromUserdata($user))->getUser()->getUsername();
     }
 }

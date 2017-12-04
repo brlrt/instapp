@@ -61,15 +61,15 @@ class Like
             }
         }
 
-        $this->app['api']->media->like($item->id);
+        $this->app['api']->media->like($item->getId());
 
         $this->app->dispatcher->dispatch(LikeEvent::NAME, new LikeEvent($item, true));
 
         $this->app['logger']->add(sprintf(
             '(%s) - `%s - instagram.com/p/%s` - liked!',
             ++$this->likeCount,
-            $item->user->username,
-            $item->code
+            $item->getUser()->getUsername(),
+            $item->getCode()
         ));
 
         $this->wait();

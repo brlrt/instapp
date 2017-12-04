@@ -19,8 +19,8 @@ class LikeAllPostsInTimeline extends Macro
 
             foreach ($timeline->getFeedItems() as $item)
             {
-                $item = $item->media_or_ad;
-                if (null !== $item && !$item->has_liked)
+                $item = $item->getMediaOrAd();
+                if (null !== $item && !$item->getHasLiked())
                 {
                     $this->app['like']->likeMedia($item);
                 }
