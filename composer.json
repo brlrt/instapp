@@ -5,8 +5,16 @@
     "require": {
         "pimple/pimple": "^3.2",
         "mgp25/instagram-php": "dev-master",
-        "symfony/console": "^3.3",
-        "symfony/event-dispatcher": "^3.3"
+        "symfony/console": "^3.4",
+        "symfony/event-dispatcher": "^3.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.4"
+    },
+    "autoload-dev": {
+        "files": [
+            "vendor/symfony/var-dumper/Resources/functions/dump.php"
+        ]
     },
     "autoload": {
         "psr-4": {"Instapp\\": "src"}
