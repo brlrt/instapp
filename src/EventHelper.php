@@ -13,7 +13,7 @@ class EventHelper
         'like'      => Event\LikeEvent::NAME,
     ];
 
-    public function get($name)
+    public static function get($name)
     {
         if (array_key_exists($name, self::$events))
             return self::$events[$name];
